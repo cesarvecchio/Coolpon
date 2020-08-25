@@ -1,14 +1,15 @@
-package br.com.coolpon.coolpon.dao;
+package br.com.coolpon.coolpon.api.service;
 
-import br.com.coolpon.coolpon.model.User;
+import br.com.coolpon.coolpon.api.model.User;
+
 import java.util.List;
 
-public class UserDao {
+public class UserService {
 
     public Object login(List<User> listUser, User info) {
         User user = null;
-        for(User users : listUser){
-            if(users.getPhone().equals(info.getPhone()) &&
+        for (User users : listUser) {
+            if (users.getPhone().equals(info.getPhone()) &&
                     users.getFullName().equals(info.getFullName())) {
 
                 user = users;
@@ -16,7 +17,7 @@ public class UserDao {
             }
         }
 
-        if(user != null)
+        if (user != null)
             return user;
         else
             return "User not found";
