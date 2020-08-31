@@ -1,5 +1,6 @@
 package br.com.coolpon.coolpon.api.controller;
 
+import br.com.coolpon.coolpon.api.model.LoginForm;
 import br.com.coolpon.coolpon.api.service.UserService;
 import br.com.coolpon.coolpon.api.model.User;
 import java.util.List;
@@ -21,8 +22,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Object login(@RequestBody User info){
-        return new UserService().login(listUser, info);
+    public Object login(@RequestBody LoginForm form){
+
+        return new UserService().login(listUser, form);
     }
 
     @GetMapping("/allUsers")
