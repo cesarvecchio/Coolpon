@@ -5,7 +5,6 @@ public class User {
     private String phone;
     private String fullName;
     private String birthDate;
-
     public User() {
     }
 
