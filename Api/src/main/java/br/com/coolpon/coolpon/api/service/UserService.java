@@ -1,27 +1,37 @@
 package br.com.coolpon.coolpon.api.service;
 
+import br.com.coolpon.coolpon.api.dto.UserDto;
 import br.com.coolpon.coolpon.api.model.LoginForm;
-import br.com.coolpon.coolpon.api.model.User;
+import br.com.coolpon.coolpon.api.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UserService {
 
-    public Object login(List<User> listUser, LoginForm form) {
-        User user = null;
-        for (User users : listUser) {
-            if (users.getPhone().equals(form.getPhone()) &&
-                    users.getFullName().equals(form.getFullName())) {
+    @Autowired
+    UserRepository userRepository;
 
-                user = users;
-                break;
-            }
-        }
+    public void register(UserDto dto) {
+        userRepository.save(dto.toEntity());
+    }
 
-        if (user != null)
-            return user;
-        else
-            return "User not found";
+    public List<UserDto> login(LoginForm login) {
+        List<UserDto> userDtos = new ArrayList<>();
+        userRepository.findByPhone(login.getPhone()).forEach(user -> userDtos.add(new UserDto(user)));
+        return userDtos;
+    }
 
+    public List<UserDto> getAllUser() {
+        List<UserDto> userDtos = new ArrayList<>();
+        userRepository.findAll().forEach(user -> userDtos.add(new UserDto(user)));
+        return userDtos;
+    }
+
+    public UserDto getUserById(Integer id) {
+        return new UserDto(userRepository.findById(id).get());
     }
 }

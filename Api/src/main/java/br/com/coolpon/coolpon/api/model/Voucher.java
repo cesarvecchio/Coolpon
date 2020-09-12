@@ -1,21 +1,23 @@
 package br.com.coolpon.coolpon.api.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Voucher {
-
+    @Id
     private Integer id;
-    private String businessId;
+    @Column
+    private String type;
+    @Column
     private String name;
+    @Column
     private String description;
+    @Column
     private String createdAt;
-
-    public Voucher(Integer id, String businessId, String name, String description, String createdAt) {
-        this.id = id;
-        this.businessId = businessId;
-        this.name = name;
-        this.description = description;
-        this.createdAt = createdAt;
-    }
-
+    @Column
+    private String businessId;
     public Integer getId() {
         return id;
     }
@@ -54,5 +56,13 @@ public class Voucher {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

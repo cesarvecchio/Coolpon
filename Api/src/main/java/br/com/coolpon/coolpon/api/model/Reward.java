@@ -1,22 +1,24 @@
 package br.com.coolpon.coolpon.api.model;
 
-public class Reward {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Reward {
+    @Id
     private Integer id;
+    @Column
     private String voucherId;
+    @Column
     private Integer userId;
+    @Column
     private String expirationDate;
+    @Column
     private String status;
+    @Column
     private String claimedAt;
 
-    public Reward(Integer id, String voucherId, Integer userId, String expirationDate, String status, String claimedAt) {
-        this.id = id;
-        this.voucherId = voucherId;
-        this.userId = userId;
-        this.expirationDate = expirationDate;
-        this.status = status;
-        this.claimedAt = claimedAt;
-    }
 
     public Integer getId() {
         return id;

@@ -15,13 +15,14 @@ public class VoucherMoney extends VoucherBase{
 
 
     @Override
-    public void useVoucher(ShoppingCart shoppingCart) {
+    public boolean useVoucher(ShoppingCart shoppingCart) {
         if (super.getStatus()) {
             shoppingCart.setTotalPrice(shoppingCart.calulateTotalPrice() * this.getValueDiscont());
             shoppingCart.getVoucherList().add(this);
             this.setStatus(false);
+            return true;
         }else {
-            System.out.println("Esse voucher não está valido");
+            return false;
         }
     }
 

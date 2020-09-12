@@ -33,7 +33,7 @@ public abstract class VoucherBase {
         this.setClaimedAt(LocalDateTime.now());
     }
 
-    public abstract void useVoucher(ShoppingCart shoppingCart);
+    public abstract boolean useVoucher(ShoppingCart shoppingCart);
 
     public void expirationVoucher(LocalDateTime expirationDate){
         this.expirationDate = expirationDate;

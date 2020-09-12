@@ -3,9 +3,10 @@ package br.com.coolpon.coolpon.api.model;
 import br.com.coolpon.coolpon.promotion.Promotion;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.List;
-
+@Entity
 public class Business {
     @Id
     private Integer id;

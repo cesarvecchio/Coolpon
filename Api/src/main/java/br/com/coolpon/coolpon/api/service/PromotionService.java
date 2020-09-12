@@ -14,7 +14,6 @@ public class PromotionService {
     PromotionRepository promotionRepository;
 
     public Promotion getAllPromotions(){
-//        promotionRepository.findAll().forEach(promotion -> promotions.add(promotion));
         return promotionRepository.findById(1).get();
     }
 

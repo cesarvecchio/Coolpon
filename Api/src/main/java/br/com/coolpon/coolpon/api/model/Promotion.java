@@ -15,7 +15,7 @@ public class Promotion {
     @Column
     private boolean active;
     @Column
-    private String descricao;
+    private String description;
     @Column
     private Integer fkBusiness;
 
@@ -43,12 +43,12 @@ public class Promotion {
         this.active = active;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getFkBusiness() {
@@ -65,7 +65,7 @@ public class Promotion {
                 "id=" + id +
                 ", numberOfTimes=" + numberOfTimes +
                 ", active=" + active +
-                ", descricao='" + descricao + '\'' +
+                ", description='" + description + '\'' +
                 ", fkBusiness=" + fkBusiness +
                 '}';
     }
