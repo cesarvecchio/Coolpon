@@ -2,20 +2,18 @@ package br.com.coolpon.coolpon.api.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Reward {
     @Id
+    @GeneratedValue
     private Integer id;
     @Column
-    private String voucherId;
+    private Integer fkVoucher;
     @Column
-    private Integer userId;
-    @Column
-    private String expirationDate;
-    @Column
-    private String status;
+    private Integer fkUser;
     @Column
     private String claimedAt;
 
@@ -28,36 +26,20 @@ public class Reward {
         this.id = id;
     }
 
-    public String getVoucherId() {
-        return voucherId;
+    public Integer getFkVoucher() {
+        return fkVoucher;
     }
 
-    public void setVoucherId(String voucherId) {
-        this.voucherId = voucherId;
+    public void setFkVoucher(Integer fkVoucher) {
+        this.fkVoucher = fkVoucher;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getFkUser() {
+        return fkUser;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setFkUser(Integer fkUser) {
+        this.fkUser = fkUser;
     }
 
     public String getClaimedAt() {

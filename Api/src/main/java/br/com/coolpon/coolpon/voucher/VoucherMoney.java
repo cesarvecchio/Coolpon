@@ -2,11 +2,12 @@ package br.com.coolpon.coolpon.voucher;
 
 import br.com.coolpon.coolpon.Product;
 import br.com.coolpon.coolpon.ShoppingCart;
+import br.com.coolpon.coolpon.api.service.VoucherService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
 public class VoucherMoney extends VoucherBase{
-
     private Double valueDiscont;
 
     public VoucherMoney(Integer id, String cod, Integer fkBusiness, Integer userId, String name, String description, String createdAt, String claimedAt, Boolean status, String expirationDate, Double valueDiscont) {
@@ -22,7 +23,6 @@ public class VoucherMoney extends VoucherBase{
         if (super.getActive()) {
             shoppingCart.setTotalPrice(shoppingCart.calulateTotalPrice() * this.getValueDiscont());
             shoppingCart.getVoucherList().add(this);
-            this.setActive(false);
             return "ok";
         }else {
             return "Cupon não está válido";

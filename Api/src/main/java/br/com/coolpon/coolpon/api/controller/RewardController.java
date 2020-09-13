@@ -1,5 +1,6 @@
 package br.com.coolpon.coolpon.api.controller;
 
+import br.com.coolpon.coolpon.api.dto.RewardDto;
 import br.com.coolpon.coolpon.api.dto.VoucherDto;
 import br.com.coolpon.coolpon.api.service.RewardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,11 @@ public class RewardController {
 
     @GetMapping()
     public ResponseEntity allReward(){
-        List<VoucherDto> voucherDtos = rewardService.getAllReward();
-        if (voucherDtos.isEmpty()){
+        List<RewardDto> rewardDtos = rewardService.getAllReward();
+        if (rewardDtos.isEmpty()){
             return ResponseEntity.status(204).build();
         }else {
-            return ResponseEntity.ok(voucherDtos);
+            return ResponseEntity.ok(rewardDtos);
         }
     }
 }

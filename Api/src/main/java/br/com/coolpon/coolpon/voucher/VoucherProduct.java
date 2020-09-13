@@ -21,7 +21,6 @@ public class VoucherProduct extends VoucherBase {
         if(this.getActive()) {
             shoppingCart.getProductList().add(this.product);
             shoppingCart.getVoucherList().add(this);
-            this.setActive(false);
             return "ok";
         }else {
             return "Cupon não está válido";

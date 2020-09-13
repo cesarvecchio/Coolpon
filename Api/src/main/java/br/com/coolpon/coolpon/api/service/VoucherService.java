@@ -2,7 +2,6 @@ package br.com.coolpon.coolpon.api.service;
 
 import br.com.coolpon.coolpon.ShoppingCart;
 import br.com.coolpon.coolpon.api.controller.ProductController;
-import br.com.coolpon.coolpon.api.dto.UserDto;
 import br.com.coolpon.coolpon.api.dto.VoucherDto;
 import br.com.coolpon.coolpon.api.model.Voucher;
 import br.com.coolpon.coolpon.api.repository.UserRepository;
@@ -64,5 +63,8 @@ public class VoucherService {
         VoucherDto voucher = new VoucherDto(voucherProduct);
         voucher.setFkBusiness(idBusiness);
         voucherRepository.save(voucher.toEntity());
+    }
+    public void updateUseVoucher(Integer idVoucher){
+        voucherRepository.updateStatus(idVoucher,false);
     }
 }

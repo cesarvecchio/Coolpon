@@ -5,16 +5,14 @@ import br.com.coolpon.coolpon.api.model.Reward;
 public class RewardDto {
 
     private Integer id;
-    private String voucherId;
+    private Integer fkVoucher;
     private Integer userId;
-    private String expirationDate;
     private String claimedAt;
 
-    public RewardDto(Integer id, String voucherId, Integer userId, String expirationDate, String claimedAt) {
+    public RewardDto(Integer id, Integer fkVoucher, Integer userId, String expirationDate, String claimedAt) {
         this.id = id;
-        this.voucherId = voucherId;
+        this.fkVoucher = fkVoucher;
         this.userId = userId;
-        this.expirationDate = expirationDate;
         this.claimedAt = claimedAt;
     }
 
@@ -23,19 +21,17 @@ public class RewardDto {
 
     public RewardDto(Reward entity) {
         this.id = entity.getId();
-        this.voucherId = entity.getVoucherId();
-        this.userId = entity.getUserId();
-        this.expirationDate = entity.getExpirationDate();
+        this.fkVoucher = entity.getFkVoucher();
+        this.userId = entity.getFkUser();
         this.claimedAt = entity.getClaimedAt();
     }
 
     public Reward toEntity(){
         Reward entity = new Reward();
-        entity.setVoucherId(this.voucherId);
+        entity.setId(this.id);
         entity.setClaimedAt(this.claimedAt);
-        entity.setVoucherId(this.voucherId);
-        entity.setExpirationDate(this.expirationDate);
-        entity.setUserId(this.userId);
+        entity.setFkVoucher(this.fkVoucher);
+        entity.setFkUser(this.userId);
         return entity;
     }
 

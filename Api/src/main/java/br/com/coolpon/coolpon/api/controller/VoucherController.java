@@ -4,7 +4,9 @@ import br.com.coolpon.coolpon.Product;
 import br.com.coolpon.coolpon.ShoppingCart;
 import br.com.coolpon.coolpon.api.dto.UserDto;
 import br.com.coolpon.coolpon.api.dto.VoucherDto;
+import br.com.coolpon.coolpon.api.model.Reward;
 import br.com.coolpon.coolpon.api.model.User;
+import br.com.coolpon.coolpon.api.service.RewardService;
 import br.com.coolpon.coolpon.api.service.UserService;
 import br.com.coolpon.coolpon.api.service.VoucherService;
 import br.com.coolpon.coolpon.voucher.VoucherBase;
@@ -22,7 +24,8 @@ import java.util.List;
 public class VoucherController {
     @Autowired
     VoucherService voucherService;
-
+    @Autowired
+    RewardService rewardService;
     @PostMapping("/money/{idBusiness}")
     public ResponseEntity addVoucherMoney(@PathVariable Integer idBusiness,@RequestBody VoucherMoney voucherMoney){
         voucherService.addVoucherMoney(idBusiness,voucherMoney);
@@ -39,6 +42,8 @@ public class VoucherController {
     @PostMapping("/use/{idVoucher}/{idUser}")
     public ResponseEntity useVoucher(@PathVariable Integer idUser,@PathVariable Integer idVoucher){
         String mensagem = voucherService.useVoucher(idUser,idVoucher);
+        voucherService.updateUseVoucher(idVoucher);
+        rewardService.addReward(idUser,idVoucher);
         if (mensagem.equals("ok")){
             return ResponseEntity.status(201).build();
         }else {
