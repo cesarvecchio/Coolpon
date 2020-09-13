@@ -7,24 +7,24 @@ import java.time.LocalDateTime;
 
 public class VoucherProduct extends VoucherBase {
     private Product product;
-    private Double priceCondition;
 
-    public VoucherProduct(Integer id, String businessId, Integer userId, String name, String description, LocalDateTime createdAt, LocalDateTime claimedAt, Boolean status, LocalDateTime expirationDate, Product product, Double priceCondition) {
-        super(id, businessId, userId, name, description, createdAt, claimedAt, status, expirationDate);
+    public VoucherProduct(Integer id, String cod, Integer fkBusiness, Integer userId, String name, String description, String createdAt, String claimedAt, Boolean status, String expirationDate, Product product) {
+        super(id, cod, fkBusiness, userId, name, description, createdAt, claimedAt, status, expirationDate);
         this.product = product;
-        this.priceCondition = priceCondition;
     }
 
+    public VoucherProduct() {
+    }
 
     @Override
-    public boolean useVoucher(ShoppingCart shoppingCart) {
-        if(this.getStatus()) {
+    public String useVoucher(ShoppingCart shoppingCart) {
+        if(this.getActive()) {
             shoppingCart.getProductList().add(this.product);
             shoppingCart.getVoucherList().add(this);
-            this.setStatus(false);
-            return true;
+            this.setActive(false);
+            return "ok";
         }else {
-            return false;
+            return "Cupon não está válido";
         }
     }
 
@@ -32,23 +32,15 @@ public class VoucherProduct extends VoucherBase {
     public String toString() {
         return "VoucherProduct{" +
                 "product=" + product +
-                ", priceCondition=" + priceCondition +
                 "} " + super.toString();
     }
 
-    public Product getProductList() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProductList(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public Double getPriceCondition() {
-        return priceCondition;
-    }
-
-    public void setPriceCondition(Double priceCondition) {
-        this.priceCondition = priceCondition;
-    }
 }

@@ -8,21 +8,24 @@ import java.time.LocalDateTime;
 public class VoucherMoney extends VoucherBase{
 
     private Double valueDiscont;
-    public VoucherMoney(Integer id, String businessId, Integer userId, String name, String description, LocalDateTime createdAt, LocalDateTime claimedAt, Boolean status, LocalDateTime expirationDate) {
-        super(id, businessId, userId, name, description, createdAt, claimedAt, status, expirationDate);
+
+    public VoucherMoney(Integer id, String cod, Integer fkBusiness, Integer userId, String name, String description, String createdAt, String claimedAt, Boolean status, String expirationDate, Double valueDiscont) {
+        super(id, cod, fkBusiness, userId, name, description, createdAt, claimedAt, status, expirationDate);
         this.valueDiscont = valueDiscont;
     }
 
+    public VoucherMoney() {
+    }
 
     @Override
-    public boolean useVoucher(ShoppingCart shoppingCart) {
-        if (super.getStatus()) {
+    public String useVoucher(ShoppingCart shoppingCart) {
+        if (super.getActive()) {
             shoppingCart.setTotalPrice(shoppingCart.calulateTotalPrice() * this.getValueDiscont());
             shoppingCart.getVoucherList().add(this);
-            this.setStatus(false);
-            return true;
+            this.setActive(false);
+            return "ok";
         }else {
-            return false;
+            return "Cupon não está válido";
         }
     }
 

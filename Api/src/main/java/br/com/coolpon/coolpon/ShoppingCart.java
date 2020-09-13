@@ -1,6 +1,7 @@
 package br.com.coolpon.coolpon;
 
 import br.com.coolpon.coolpon.Product;
+import br.com.coolpon.coolpon.api.dto.UserDto;
 import br.com.coolpon.coolpon.voucher.VoucherBase;
 import br.com.coolpon.coolpon.api.model.User;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-    private User user;
+    private UserDto user;
     private List<Product> productList;
     private List<VoucherBase> voucherList;
     private Double totalPrice;
@@ -33,11 +34,11 @@ public class ShoppingCart {
         this.totalPrice = totalPrice;
     }
 
-    public User getUser() {
+    public UserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDto user) {
         this.user = user;
     }
 

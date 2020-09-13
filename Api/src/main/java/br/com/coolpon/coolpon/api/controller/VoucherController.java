@@ -2,6 +2,7 @@ package br.com.coolpon.coolpon.api.controller;
 
 import br.com.coolpon.coolpon.Product;
 import br.com.coolpon.coolpon.ShoppingCart;
+import br.com.coolpon.coolpon.api.dto.UserDto;
 import br.com.coolpon.coolpon.api.dto.VoucherDto;
 import br.com.coolpon.coolpon.api.model.User;
 import br.com.coolpon.coolpon.api.service.UserService;
@@ -22,23 +23,26 @@ public class VoucherController {
     @Autowired
     VoucherService voucherService;
 
-    @PostMapping("/voucherMoney/{idUser}")
-    public ResponseEntity addVoucherMoney(@PathVariable Integer idUser,@RequestBody VoucherMoney voucherMoney){
-        boolean isSucess = voucherService.useVoucher(idUser,voucherMoney);
-        if (isSucess){
-            return ResponseEntity.status(201).build();
-        }else {
-            return ResponseEntity.ok("Código invalido");
-        }
+    @PostMapping("/money/{idBusiness}")
+    public ResponseEntity addVoucherMoney(@PathVariable Integer idBusiness,@RequestBody VoucherMoney voucherMoney){
+        voucherService.addVoucherMoney(idBusiness,voucherMoney);
+        return ResponseEntity.status(201).build();
     }
 
-    @PostMapping("/voucherProduct/{idUser}")
-    public ResponseEntity addVoucherProduct(@PathVariable Integer idUser,@RequestBody VoucherProduct voucherProduct){
-        boolean isSucess = voucherService.useVoucher(idUser,voucherProduct);
-        if (isSucess){
+    @PostMapping("/product/{idBusiness}")
+    public ResponseEntity addVoucherProduct(@PathVariable Integer idBusiness,@RequestBody VoucherProduct voucherProduct){
+        voucherService.addVoucherProduct(idBusiness,voucherProduct);
+        return ResponseEntity.status(201).build();
+    }
+
+
+    @PostMapping("/use/{idVoucher}/{idUser}")
+    public ResponseEntity useVoucher(@PathVariable Integer idUser,@PathVariable Integer idVoucher){
+        String mensagem = voucherService.useVoucher(idUser,idVoucher);
+        if (mensagem.equals("ok")){
             return ResponseEntity.status(201).build();
         }else {
-            return ResponseEntity.ok("Código invalido");
+            return ResponseEntity.ok(mensagem);
         }
     }
 
@@ -52,16 +56,10 @@ public class VoucherController {
         }
     }
 
-//    @PostMapping("/addProduct")
-//    public String addProduct(@RequestBody Product product){
-//        shoppingCart.getProductList().add(product);
-//        return String.format("Voucher usado com sucesso: " + shoppingCart.getProductList());
-//    }
-//
-//    @GetMapping("/listProduct")
-//    public List<Product> allProduct(){
-//        return shoppingCart.getProductList();
-//    }
+
+
+
+
 
 
 }

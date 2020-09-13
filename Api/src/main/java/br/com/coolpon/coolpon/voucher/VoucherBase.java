@@ -7,35 +7,40 @@ import java.time.LocalDateTime;
 
 public abstract class VoucherBase {
     private Integer id;
-    private String businessId;
+    private String cod;
+    private Integer fkBusiness;
     private Integer userId;
     private String name;
     private String description;
-    private LocalDateTime createdAt;
-    private LocalDateTime claimedAt;
-    private Boolean status;
-    private LocalDateTime expirationDate;
+    private String createdAt;
+    private String claimedAt;
+    private Boolean active;
+    private String expirationDate;
 
-    public VoucherBase(Integer id, String businessId, Integer userId, String name, String description, LocalDateTime createdAt, LocalDateTime claimedAt, Boolean status, LocalDateTime expirationDate) {
+    public VoucherBase(Integer id, String cod, Integer fkBusiness, Integer userId, String name, String description, String createdAt, String claimedAt, Boolean active, String expirationDate) {
         this.id = id;
-        this.businessId = businessId;
+        this.cod = cod;
+        this.fkBusiness = fkBusiness;
         this.userId = userId;
         this.name = name;
         this.description = description;
         this.createdAt = createdAt;
         this.claimedAt = claimedAt;
-        this.status = status;
+        this.active = active;
         this.expirationDate = expirationDate;
     }
 
     public void claimedVoucher(User user) {
         this.setUserId(user.getId());
-        this.setClaimedAt(LocalDateTime.now());
+        this.setClaimedAt(LocalDateTime.now().toString());
     }
 
-    public abstract boolean useVoucher(ShoppingCart shoppingCart);
+    public VoucherBase() {
+    }
 
-    public void expirationVoucher(LocalDateTime expirationDate){
+    public abstract String useVoucher(ShoppingCart shoppingCart);
+
+    public void expirationVoucher(String expirationDate){
         this.expirationDate = expirationDate;
     };
 
@@ -43,38 +48,39 @@ public abstract class VoucherBase {
     public String toString() {
         return "VoucherBase{" +
                 "id=" + id +
-                ", businessId='" + businessId + '\'' +
+                ", cod='" + cod + '\'' +
+                ", fkBusiness=" + fkBusiness +
                 ", userId=" + userId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", claimedAt='" + claimedAt + '\'' +
-                ", status='" + status + '\'' +
+                ", active=" + active +
                 ", expirationDate='" + expirationDate + '\'' +
                 '}';
     }
 
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getClaimedAt() {
+    public String getClaimedAt() {
         return claimedAt;
     }
 
-    public void setClaimedAt(LocalDateTime claimedAt) {
+    public void setClaimedAt(String claimedAt) {
         this.claimedAt = claimedAt;
     }
 
-    public LocalDateTime getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDateTime expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -94,12 +100,12 @@ public abstract class VoucherBase {
         this.id = id;
     }
 
-    public String getBusinessId() {
-        return businessId;
+    public Integer getFkBusiness() {
+        return fkBusiness;
     }
 
-    public void setBusinessId(String businessId) {
-        this.businessId = businessId;
+    public void setFkBusiness(Integer fkBusiness) {
+        this.fkBusiness = fkBusiness;
     }
 
     public String getName() {
@@ -119,12 +125,19 @@ public abstract class VoucherBase {
     }
 
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
+    public String getCod() {
+        return cod;
+    }
+
+    public void setCod(String cod) {
+        this.cod = cod;
+    }
 }

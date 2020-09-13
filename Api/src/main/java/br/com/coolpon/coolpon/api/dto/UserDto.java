@@ -2,9 +2,6 @@ package br.com.coolpon.coolpon.api.dto;
 
 import br.com.coolpon.coolpon.ShoppingCart;
 import br.com.coolpon.coolpon.api.model.User;
-import br.com.coolpon.coolpon.promotion.Loyaty;
-
-import javax.persistence.Column;
 
 public class UserDto {
 
@@ -15,7 +12,7 @@ public class UserDto {
     private String birthDate;
     private Integer fkLoyalty;
     private Integer fkBussines;
-    private ShoppingCart shoppingCart;
+
     public UserDto() {
     }
 
@@ -27,7 +24,6 @@ public class UserDto {
         this.cpf = user.getCpf();
         this.fkBussines = user.getFkBusiness();
         this.fkLoyalty = user.getFkLoyalty();
-        this.shoppingCart = new ShoppingCart();
     }
 
     public User toEntity() {
@@ -56,14 +52,6 @@ public class UserDto {
 
     public void setFkBussines(Integer fkBussines) {
         this.fkBussines = fkBussines;
-    }
-
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
     }
 
     public String getCpf() {
